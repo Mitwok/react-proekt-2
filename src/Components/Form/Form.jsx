@@ -3,7 +3,9 @@ const Form = (props) => {
     event.preventDefault();
 
     const title = event.currentTarget.elements.title.value;
-    const amount = event.currentTarget.elements.amount.value;
+    const amount = parseFloat(
+      event.currentTarget.elements.amount.value
+    ).toFixed(2);
 
     event.currentTarget.reset();
     event.currentTarget.elements.title.focus();

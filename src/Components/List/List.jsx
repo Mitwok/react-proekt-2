@@ -12,7 +12,14 @@ const List = (props) => {
               <span className="text-center">{item.amount} zł</span>
             </div>
             <div className="flex flex-nowrap">
-              <button title="Edytuj" className="p-2 mr-2">
+              <button
+                type="button"
+                onClick={() =>
+                  props.onItemEdit(item.id, item.amount, item.title)
+                }
+                title="Edytuj"
+                className="p-2 mr-2"
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
