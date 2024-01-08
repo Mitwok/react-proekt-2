@@ -8,21 +8,38 @@ import Switch from "./Components/Switch/Switch";
 import Modal from "./Components/Modal/Modal";
 
 function App() {
-  const [incomes, setIncomes] = useState(() => {
+  const [windowHeight, setWindowHeight] = useState(window.innerHeight);
+  const minHeight =
+    38.75 * parseFloat(getComputedStyle(document.documentElement).fontSize);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowHeight(window.innerHeight);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  const setInitialIncomes = () => {
     const storageState = localStorage.getItem("incomes");
     return storageState ? JSON.parse(storageState) : [];
-  });
+  };
 
-  const [expenses, setExpenses] = useState(() => {
+  const setInitialExpenses = () => {
     const storageState = localStorage.getItem("expenses");
     return storageState ? JSON.parse(storageState) : [];
-  });
+  };
 
-  const incomesTotal = incomes.reduce((accumulator, item) => {
-    const incomesItem = parseFloat(item.amount);
-    accumulator += incomesItem;
-    return accumulator;
-  }, 0);
+  const [incomes, setIncomes] = useState(() => setInitialIncomes());
+
+  const [expenses, setExpenses] = useState(() => setInitialExpenses());
+
+  const incomesTotal = incomes.reduce(
+    (accumulator, item) => accumulator + parseFloat(item.amount),
+    0
+  );
 
   const expensesTotal = expenses.reduce((accumulator, item) => {
     const expensesItem = parseFloat(item.amount);
@@ -58,12 +75,12 @@ function App() {
     setExpenses((prevState) => [newPosition, ...prevState]);
   };
 
-  const handleExpensesRemove = (id, amount) => {
+  const handleExpensesRemove = (id) => {
     const newExpenses = expenses.filter((expense) => expense.id !== id);
     setExpenses(newExpenses);
   };
 
-  const handleIncomesRemove = (id, amount) => {
+  const handleIncomesRemove = (id) => {
     const newIncomes = incomes.filter((income) => income.id !== id);
     setIncomes(newIncomes);
   };
@@ -74,21 +91,37 @@ function App() {
 
   const saveChanges = (inputTitle, inputAmount, inputId) => {
     if (listType === "expenses") {
-      const itemIndex = expenses.findIndex((item) => item.id === inputId);
-      if (itemIndex >= 0) {
-        expenses[itemIndex].title = inputTitle;
-        expenses[itemIndex].amount = parseFloat(inputAmount).toFixed(2);
-        localStorage.setItem(listType, JSON.stringify(expenses));
-        closeModal();
-      }
+      setExpenses((prevState) => {
+        return prevState.map((expense) => {
+          if (expense.id === inputId) {
+            return {
+              ...expense,
+              title: inputTitle ? inputTitle : expense.title,
+              amount: inputAmount
+                ? parseFloat(inputAmount).toFixed(2)
+                : expense.amount,
+            };
+          }
+          return expense;
+        });
+      });
+      closeModal();
     } else if (listType === "incomes") {
-      const itemIndex = incomes.findIndex((item) => item.id === inputId);
-      if (itemIndex >= 0) {
-        incomes[itemIndex].title = inputTitle;
-        incomes[itemIndex].amount = parseFloat(inputAmount).toFixed(2);
-        localStorage.setItem(listType, JSON.stringify(incomes));
-        closeModal();
-      }
+      setIncomes((prevState) => {
+        return prevState.map((income) => {
+          if (income.id === inputId) {
+            return {
+              ...income,
+              title: inputTitle ? inputTitle : income.title,
+              amount: inputAmount
+                ? parseFloat(inputAmount).toFixed(2)
+                : income.amount,
+            };
+          }
+          return income;
+        });
+      });
+      closeModal();
     }
   };
 
@@ -132,7 +165,11 @@ function App() {
   };
 
   return (
-    <div className="bg-slate-200 flex h-[100svh]">
+    <div
+      className={`bg-slate-200 flex ${
+        windowHeight > minHeight ? "h-[100svh]" : "h-[38.75rem]"
+      }`}
+    >
       {modalActive ? (
         <Modal
           title={editTitle}
@@ -151,7 +188,7 @@ function App() {
           expenseIsActive={expenseIsActive}
           incomeIsActive={incomeIsActive}
         />
-        <section className="flex mx-0 md:mx-4 justify-center h-[calc(100svh-19.5rem)] md:h-[calc(100svh-16.5rem)]">
+        <section className="flex mx-0 md:mx-4 justify-center h-[calc(100%-19.5rem)] md:h-[calc(100%-16.5rem)]">
           <div
             className={`p-4 h-full md:w-1/2 w-full flex-col ${
               expenseIsActive ? "flex" : "hidden md:flex"
