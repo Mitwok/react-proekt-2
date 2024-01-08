@@ -1,3 +1,82 @@
+# Budget Calculator Web Application
+
+Welcome to the **Budget Calculator**, a web application designed to help you manage your household finances effectively. This application allows you to keep track of your expenses and income, calculates the total amounts for both, and provides an overview of your remaining balance. Additionally, all your data is stored locally, ensuring that your financial information is preserved even if you reload the page.
+
+## Features
+
+### Expense and Income Tracking
+
+- Add and categorize your expenses and income easily.
+- Edit and delete entries as needed.
+
+### Summaries and Totals
+
+- Get real-time calculations for the total amounts of your expenses, total income, and remaining balance.
+- Monitor your overall account balance.
+
+### Data Persistence
+
+- All your financial data is stored locally in the browser's memory.
+- Your information is automatically restored upon reloading the page.
+
+## Usage
+
+1. **Adding Entries:**
+
+   - Click on the "+" button to add a new expense or income entry.
+   - Choose the category and enter the amount.
+
+2. **Editing and Deleting:**
+
+   - Hover over an entry to reveal options for editing or deleting.
+   - Make necessary changes or remove entries that are no longer relevant.
+
+3. **Viewing Summaries:**
+
+   - Check the real-time summaries of your total expenses, total income, and remaining balance.
+
+4. **Persistence:**
+   - Your financial data is automatically saved locally.
+   - Feel free to reload the page, and your information will be restored.
+
+## Technologies Used
+
+- **Frontend:**
+
+  - HTML, CSS, JavaScript
+  - React.js for the user interface
+
+- **Data Storage:**
+  - Local Storage for persisting data on the client side
+
+### Deployed on Netlify
+
+The application is deployed on Netlify and can be accessed through the following link:
+
+[![Netlify](https://img.shields.io/badge/Netlify-Deployed-success?style=for-the-badge&logo=netlify)](https://your-netlify-app-url)
+
+### Application Screenshots
+
+#### Home Page
+
+![Home Page](screenshots/home-page.png)
+
+#### Adding Transactions
+
+![Add Transactions](screenshots/add-transactions.png)
+
+#### Editing Entries
+
+![Edit and Delete](screenshots/edit.png)
+
+#### Overview of Summary Information
+
+![Summary](screenshots/summary.png)
+
+#### Mobile Version
+
+![Mobile Version](screenshots/mobile-version.png)
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
@@ -68,3 +147,11 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+## Contributing
+
+Contributions are welcome! Feel free to open issues or submit pull requests to enhance the functionality or fix any bugs.
+
+## License
+
+This project is licensed under the [MIT License](LICENSE.md).
