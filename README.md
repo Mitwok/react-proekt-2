@@ -53,7 +53,7 @@ Welcome to the **Budget Calculator**, a web application designed to help you man
 
 The application is deployed on Netlify and can be accessed through the following link:
 
-[![Netlify](https://img.shields.io/badge/Netlify-Deployed-success?style=for-the-badge&logo=netlify)](https://your-netlify-app-url)
+[![Netlify](https://img.shields.io/badge/Netlify-Deployed-success?style=for-the-badge&logo=netlify)](https://nimble-pithivier-2162b6.netlify.app/)
 
 ### Application Screenshots
 
